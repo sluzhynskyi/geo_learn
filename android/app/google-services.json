@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "685153417486",
+    "project_id": "geo-learn-3c99a",
+    "storage_bucket": "geo-learn-3c99a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685153417486:android:022762eea6a60ef7713f5f",
+        "android_client_info": {
+          "package_name": "geo_learn.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685153417486-b4nvl1l4p4dorafn3n0739t0qqvr6tch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTlhBm-923wOMF9uKPuT3HSIWXnecfdlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685153417486-b4nvl1l4p4dorafn3n0739t0qqvr6tch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

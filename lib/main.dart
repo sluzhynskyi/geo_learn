@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_learn/screens/home_screen.dart';
+import 'package:geo_learn/screens/login/login_screen.dart';
 
 import 'blocs/authentication_bloc/authentication_bloc.dart';
 import 'blocs/simple_bloc_observer.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           if (state is AuthenticationFailure) {
             // return GetStartedScreen(userRepository: _userRepository);
+              return LoginScreen(userRepository: _userRepository);
           }
 
           if (state is AuthenticationSuccess) {

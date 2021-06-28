@@ -52,3 +52,22 @@ class AppRouter extends StatelessWidget{
     );
   }
 }
+
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ProviderScope(
+//       child: MaterialApp(
+//         title: 'Flutter Riverpod Quiz',
+//         debugShowCheckedModeBanner: false,
+//         theme: ThemeData(
+//           primarySwatch: Colors.green,
+//           bottomSheetTheme:
+//               const BottomSheetThemeData(backgroundColor: Colors.transparent),
+//         ),
+//         home: QuizScreen(),
+//       ),
+//     );
+//   }
+// }

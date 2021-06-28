@@ -4,6 +4,7 @@ import 'package:geo_learn/repositories/user_repository.dart';
 
 import 'package:geo_learn/screens/home_screen.dart';
 import 'package:geo_learn/screens/login/login_screen.dart';
+import 'package:geo_learn/screens/quiz/quiz_screen.dart';
 import 'package:geo_learn/screens/register/register_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -11,7 +12,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 
 import 'package:provider/provider.dart';
-
+// import 'package:flutter_hooks/flutter_hooks.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +23,15 @@ void main() async {
     GeoLearn()
   );
 }
+
+
+// final quizQuestionsProvider = FutureProvider.autoDispose<List<Question>>(
+//   (ref) => ref.watch(quizRepositoryProvider).getQuestions(
+//         numQuestions: 5,
+//         categoryId: 22,
+//         difficulty: Difficulty.any,
+//       ),
+// );
 
 class GeoLearn extends StatelessWidget {
   
@@ -48,6 +60,7 @@ class AppRouter extends StatelessWidget{
           '/': (context) => HomeScreen(),
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegisterScreen(),
+          '/quiz': (context) => QuizScreen()
           
         }
     );
@@ -55,7 +68,7 @@ class AppRouter extends StatelessWidget{
 }
 
 
-// class MyApp extends StatelessWidget {
+// class GeoLearn extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return ProviderScope(

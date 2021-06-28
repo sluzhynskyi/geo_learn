@@ -1,7 +1,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:quiz_with_flags/controllers/quiz/quiz_state.dart';
-import 'package:quiz_with_flags/models/question_model.dart';
+import 'package:geo_learn/controllers/quiz/quiz_state.dart';
+import 'package:geo_learn/models/question_model.dart';
 
 final quizControllerProvider =
     StateNotifierProvider.autoDispose<QuizController, QuizState>(

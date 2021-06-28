@@ -25,7 +25,16 @@ final quizQuestionsProvider = FutureProvider.autoDispose<List<Question>>(
       ),
 );
 
-class QuizScreen extends HookWidget {
+class QuizScreen extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return ProviderScope(
+      child: _QuizScreenInner(), 
+    );
+  }
+}
+
+class _QuizScreenInner extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final quizQuestions = useProvider(quizQuestionsProvider);
@@ -41,6 +50,9 @@ class QuizScreen extends HookWidget {
         ),
       ),
       child: Scaffold(
+        appBar:AppBar(
+          title: Text('Quiz'),
+        ),
         backgroundColor: Colors.transparent,
         body: quizQuestions.when(
           data: (questions) => _buildBody(context, pageController, questions),
@@ -167,6 +179,12 @@ class QuizResults extends StatelessWidget {
           onTap: () {
             context.refresh(quizRepositoryProvider);
             context.read(quizControllerProvider.notifier).reset();
+          },
+        ),
+        CustomButton(
+          title: 'Go back',
+          onTap: () {
+            Navigator.pop(context);
           },
         ),
       ],

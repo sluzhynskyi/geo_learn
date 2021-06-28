@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:quiz_with_flags/models/question_model.dart';
+import 'package:geo_learn/models/question_model.dart';
 
 enum QuizStatus { initial, correct, incorrect, complete }
 

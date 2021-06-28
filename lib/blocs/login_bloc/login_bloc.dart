@@ -11,8 +11,8 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository _userRepository;
 
-  LoginBloc({required UserRepository}) 
-  : _userRepository = UserRepository,
+  LoginBloc({required userRepository}) 
+  : _userRepository = userRepository,
    super(LoginState.initial());
 
   @override

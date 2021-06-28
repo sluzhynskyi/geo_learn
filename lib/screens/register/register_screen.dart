@@ -1,15 +1,15 @@
-import 'package:geo_learn/blocs/login_bloc/login_bloc.dart';
+import 'package:geo_learn/blocs/registration_bloc/registration_bloc.dart';
 import 'package:geo_learn/repositories/user_repository.dart';
-import 'package:geo_learn/screens/login/login_form.dart';
+import 'package:geo_learn/screens/register/register_form.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   final UserRepository _userRepository;
 
-  const LoginScreen({Key? key, required UserRepository userRepository})
+  const RegisterScreen({Key? key, required UserRepository userRepository})
       : _userRepository = userRepository,
         super(key: key);
 
@@ -21,8 +21,8 @@ class LoginScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: BlocProvider<LoginBloc>(
-        create: (context) => LoginBloc(userRepository: _userRepository),
+      body: BlocProvider<RegistrationBloc>(
+        create: (context) => RegistrationBloc(userRepository: _userRepository),
         child: Container(
           height: double.infinity,
           child: SingleChildScrollView(
@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
 
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: LoginForm(userRepository: _userRepository,),
+                      child: RegisterForm(userRepository: _userRepository,),
                     )
                 )
               ],

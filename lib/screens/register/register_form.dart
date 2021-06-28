@@ -1,48 +1,52 @@
 import 'package:geo_learn/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:geo_learn/blocs/registration_bloc/registration_bloc.dart';
+
+
 import 'package:geo_learn/blocs/login_bloc/login_bloc.dart';
 import 'package:geo_learn/repositories/user_repository.dart';
-import "package:geo_learn/screens/login/login_screen.dart";
 import "package:geo_learn/screens/register/register_screen.dart";
+import "package:geo_learn/screens/login/login_screen.dart";
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
-class LoginForm extends StatefulWidget {
+class RegisterForm extends StatefulWidget {
   final UserRepository _userRepository;
 
-  const LoginForm({Key? key, required UserRepository userRepository})
+  const RegisterForm({Key? key, required UserRepository userRepository})
       : _userRepository = userRepository,
         super(key: key);
 
   @override
-  _LoginFormState createState() => _LoginFormState();
+  _RegisterFormState createState() => _RegisterFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   bool get isPopulated =>
       _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
 
-  bool isButtonEnabled(LoginState state) {
+  bool isButtonEnabled(RegistrationState state) {
     return state.isFormValid && isPopulated && !state.isSubmitting;
   }
 
-  late LoginBloc _loginBloc;
+  late RegistrationBloc _registrationBloc;
 
   @override
   void initState() {
     super.initState();
-    _loginBloc = BlocProvider.of<LoginBloc>(context);
+    _registrationBloc = BlocProvider.of<RegistrationBloc>(context);
     _emailController.addListener(_onEmailChange);
     _passwordController.addListener(_onPasswordChange);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocListener<RegistrationBloc, RegistrationState>(
       listener: (context, state) {
         if (state.isFailure) {
           Scaffold.of(context)
@@ -52,7 +56,7 @@ class _LoginFormState extends State<LoginForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('Login Failure'),
+                    Text('Registration Failure'),
                     Icon(Icons.error),
                   ],
                 ),
@@ -69,7 +73,7 @@ class _LoginFormState extends State<LoginForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('Logging In...'),
+                    Text('Signing up...'),
                     CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     )
@@ -85,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
           );
         }
       },
-      child: BlocBuilder<LoginBloc, LoginState>(
+      child: BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.all(20.0),
@@ -127,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
                         _onFormSubmitted();}
                     },
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    child: Text("Log In")
+                    child: Text("Register")
                   ),
                   SizedBox(
                     height: 10,
@@ -136,11 +140,11 @@ class _LoginFormState extends State<LoginForm> {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (_) {
                         // return RegisterScreen(userRepository: widget._userRepository,);
-                        return RegisterScreen(userRepository: widget._userRepository,);
+                        return LoginScreen(userRepository: widget._userRepository,);
                       }));
                     },
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    child: Text("Register")
+                    child: Text("Log in")
                   ),
                 ],
               ),
@@ -159,15 +163,15 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _onEmailChange() {
-    _loginBloc.add(LoginEmailChanged(email: _emailController.text));
+    _registrationBloc.add(RegistrationEmailChanged(email: _emailController.text));
   }
 
   void _onPasswordChange() {
-    _loginBloc.add(LoginPasswordChanged(password: _passwordController.text));
+    _registrationBloc.add(RegistrationPasswordChanged(password: _passwordController.text));
   }
 
   void _onFormSubmitted() {
-    _loginBloc.add(LoginSubmitted(
+    _registrationBloc.add(RegistrationSubmitted(
         email: _emailController.text, password: _passwordController.text));
   }
 }

@@ -1,7 +1,8 @@
 import 'package:geo_learn/utils/validators.dart';
 import 'package:geo_learn/utils/auth.dart';
-import 'package:provider/provider.dart';
+import 'package:geo_learn/widgets/error.dart';
 
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -32,99 +33,97 @@ class LoginScreenState extends State<LoginScreen> {
       Future.microtask(() => Navigator.pushReplacementNamed(context, "/"));
       return Scaffold();
     }
-    //TODO: need better UI
+
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: Container(
-        padding: EdgeInsets.all(30),
-        decoration: BoxDecoration(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            FlutterLogo(
-              size: 150,
-            ),
-            Text(
-              'Login to Start',
-              textAlign: TextAlign.center,
-            ),
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                icon: Icon(Icons.email),
-                labelText: "Email",
-              ),
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              autocorrect: false,
-              validator: (_) {
-                return !Validators.isValidEmail(email) ? 'Invalid Email' : null;
-              },
-            ),
-            TextFormField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                icon: Icon(Icons.lock),
-                labelText: "Password",
-              ),
-              obscureText: true,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              autocorrect: false,
-              validator: (_) {
-                return !Validators.isValidPassword(password)
-                    ? 'Invalid Password'
-                    : null;
-              },
-            ),
-            Container(
-              child: TextButton(
-                child: Text('Log in', textAlign: TextAlign.center),
-                onPressed: () async {
-                  try {
-                    var user = await Auth.signIn(email, password);
-                  } catch (error) {
-                    setState(() {
-                      loginError = "Incorrect password or e-mail";
-                    });
-                  }
-                  if (user != null) {
-                    Navigator.pushReplacementNamed(context, '/');
-                  }
-                },
-              ),
-            ),
-            Container(
-                margin: EdgeInsets.only(bottom: 10),
-                child: TextButton(
-                  child: Text('Sign Up', textAlign: TextAlign.center),
-                  onPressed: () async {
-                    Navigator.pushReplacementNamed(context, '/register');
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(30),
+            decoration: BoxDecoration(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlutterLogo(
+                  size: 150,
+                ),
+                Text(
+                  'Log in to Start',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.email),
+                    labelText: "Email",
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autocorrect: false,
+                  validator: (_) {
+                    return !Validators.isValidEmail(email)
+                        ? 'Invalid Email'
+                        : null;
                   },
-                )),
-            Builder(builder: (context) {
-              // print(loginError);
-              if (loginError != "") {
-                return Container(
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.rectangle,
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(10)),
-                        
-                            ),
-                    width: double.infinity,
-                    child: Text(loginError,
-                        style: TextStyle(color: Colors.white))
-                 );
-              }
-              return Container();
-            })
-          ],
-        ),
+                ),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.lock),
+                    labelText: "Password",
+                  ),
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  autocorrect: false,
+                  validator: (_) {
+                    return !Validators.isValidPassword(password)
+                        ? 'Invalid Password'
+                        : null;
+                  },
+                ),
+                Container(
+                  child: TextButton(
+                    child: Text('Log in', textAlign: TextAlign.center),
+                    onPressed: () async {
+                      try {
+                        var user = await Auth.signIn(email, password);
+                      } catch (error) {
+                        setState(() {
+                          loginError = "Incorrect password or e-mail";
+                        });
+                      }
+                      if (user != null) {
+                        Navigator.pushReplacementNamed(context, '/');
+                      }
+                    },
+                  ),
+                ),
+                Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    child: TextButton(
+                      child: Text('Sign Up', textAlign: TextAlign.center),
+                      onPressed: () async {
+                        Navigator.pushReplacementNamed(context, '/register');
+                      },
+                    )),
+              ],
+            ),
+          ),
+          Spacer(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ShowError(loginError)
+          )
+        ],
       ),
     );
   }

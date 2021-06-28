@@ -32,7 +32,7 @@ class LoginScreenState extends State<LoginScreen> {
       Future.microtask(() => Navigator.pushNamed(context, "/"));
       return Scaffold();
     }
-
+    //TODO: need better UI
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -81,14 +81,12 @@ class LoginScreenState extends State<LoginScreen> {
               },
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 10),
               child: TextButton(
                 child: Text('Log in', textAlign: TextAlign.center),
                 onPressed: () async {
                   try {
                     var user = await Auth.signIn(email, password);
                   } catch (error) {
-                    //TODO: Show error
                     setState(() {
                       loginError = "Incorrect password or e-mail";
                     });
@@ -99,21 +97,29 @@ class LoginScreenState extends State<LoginScreen> {
                 },
               ),
             ),
-            TextButton(
-              child: Text('Sign Up', textAlign: TextAlign.center),
-              onPressed: () async {
-                Navigator.pushReplacementNamed(context, '/register');
-              },
-            ),
+            Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: TextButton(
+                  child: Text('Sign Up', textAlign: TextAlign.center),
+                  onPressed: () async {
+                    Navigator.pushReplacementNamed(context, '/register');
+                  },
+                )),
             Builder(builder: (context) {
-              print(loginError);
+              // print(loginError);
               if (loginError != "") {
                 return Container(
-                  width:double.infinity,
-                  color:Color(0xffff0000),
-                  child: Text(
-                    loginError)
-                  );
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.rectangle,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(10)),
+                        
+                            ),
+                    width: double.infinity,
+                    child: Text(loginError,
+                        style: TextStyle(color: Colors.white))
+                 );
               }
               return Container();
             })

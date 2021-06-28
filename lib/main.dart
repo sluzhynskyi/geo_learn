@@ -48,6 +48,7 @@ class AppRouter extends StatelessWidget{
           '/': (context) => HomeScreen(),
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegisterScreen(),
+          
         }
     );
   }

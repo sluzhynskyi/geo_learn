@@ -36,6 +36,7 @@ class RegisterScreenState extends State<RegisterScreen>{
       return Scaffold();
     }
 
+    //TODO: need better UI
     return Scaffold(
     extendBodyBehindAppBar: true,
     appBar: AppBar(

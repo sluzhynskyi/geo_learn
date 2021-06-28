@@ -38,8 +38,8 @@ class GeoLearn extends StatelessWidget {
 class AppRouter extends StatelessWidget{
   @override
   Widget build(BuildContext context){
-    User? user = Provider.of<User?>(context);
-    print(user);
+    // User? user = Provider.of<User?>(context);
+    // print(user);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Flutter Demo",

@@ -115,7 +115,7 @@ class RegisterScreenState extends State<RegisterScreen>{
           ),
         ),
         TextButton(
-            child: Text('Log in instead?', textAlign: TextAlign.center),
+            child: Text('Log in instead', textAlign: TextAlign.center),
             onPressed: () async {
               Navigator.pushReplacementNamed(context, '/login');
             },

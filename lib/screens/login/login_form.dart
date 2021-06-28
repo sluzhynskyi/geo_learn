@@ -121,7 +121,7 @@ class _LoginFormState extends State<LoginForm> {
                   SizedBox(
                     height: 10,
                   ),
-                  MaterialButton(
+                  MaterialButton( // Login button
                     onPressed: (){
                       if (isButtonEnabled(state)) {
                         _onFormSubmitted();}
@@ -132,7 +132,7 @@ class _LoginFormState extends State<LoginForm> {
                   SizedBox(
                     height: 10,
                   ),
-                  MaterialButton(
+                  MaterialButton( // Register button
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (_) {
                         // return RegisterScreen(userRepository: widget._userRepository,);

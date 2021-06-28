@@ -24,6 +24,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       yield* _mapRegistrationEmailChangeToState(event.email);
     } else if (event is RegistrationPasswordChanged) {
       yield* _mapRegistrationPasswordChangeToState(event.password);
+    // else if (event is Registration)
     } else if (event is RegistrationSubmitted) {
       yield* _mapRegistrationSubmittedToState(
           email: event.email, password: event.password);

@@ -26,9 +26,12 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _password_repeatController = TextEditingController();
+  
+
 
   bool get isPopulated =>
-      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty && _password_repeatController.text.isNotEmpty;
 
   bool isButtonEnabled(RegistrationState state) {
     return state.isFormValid && isPopulated && !state.isSubmitting;
@@ -87,6 +90,7 @@ class _RegisterFormState extends State<RegisterForm> {
           BlocProvider.of<AuthenticationBloc>(context).add(
             AuthenticationLoggedIn(),
           );
+          Navigator.pop(context);
         }
       },
       child: BlocBuilder<RegistrationBloc, RegistrationState>(
@@ -122,6 +126,19 @@ class _RegisterFormState extends State<RegisterForm> {
                       return !state.isPasswordValid ? 'Invalid Password' : null;
                     },
                   ),
+                  TextFormField(
+                    controller: _password_repeatController,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.lock),
+                      labelText: "Repeat Password",
+                    ),
+                    obscureText: true,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autocorrect: false,
+                    validator: (_) {
+                      return !state.doPasswordsMatch ? 'Passwords don\'t match' : null;
+                    },
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -138,7 +155,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   ),
                   MaterialButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
                         // return RegisterScreen(userRepository: widget._userRepository,);
                         return LoginScreen(userRepository: widget._userRepository,);
                       }));

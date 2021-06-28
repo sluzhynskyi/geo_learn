@@ -7,7 +7,8 @@ import 'blocs/authentication_bloc/authentication_bloc.dart';
 import 'blocs/simple_bloc_observer.dart';
 import 'repositories/user_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
-void main() async{
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp();
@@ -28,18 +29,19 @@ void main() async{
 class MyApp extends StatelessWidget {
   final UserRepository _userRepository;
 
-  MyApp({required UserRepository userRepository}) : _userRepository = userRepository;
+  MyApp({required UserRepository userRepository})
+      : _userRepository = userRepository;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Flutter Demo",
-      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        builder: (context, state) {
+        debugShowCheckedModeBanner: false,
+        title: "Flutter Demo",
+        home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
           if (state is AuthenticationFailure) {
             // return GetStartedScreen(userRepository: _userRepository);
-              return LoginScreen(userRepository: _userRepository);
+            return LoginScreen(userRepository: _userRepository);
           }
 
           if (state is AuthenticationSuccess) {
@@ -54,8 +56,6 @@ class MyApp extends StatelessWidget {
               child: Center(child: Text("Loading")),
             ),
           );
-        }
-      )
-    );
+        }));
   }
 }

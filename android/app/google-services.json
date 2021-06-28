@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:685153417486:android:022762eea6a60ef7713f5f",
         "android_client_info": {
-          "package_name": "geo_learn.android"
+          "package_name": "com.example.geo_learn"
         }
       },
       "oauth_client": [

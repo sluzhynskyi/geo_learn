@@ -6,9 +6,11 @@ import 'package:geo_learn/screens/login/login_screen.dart';
 import 'blocs/authentication_bloc/authentication_bloc.dart';
 import 'blocs/simple_bloc_observer.dart';
 import 'repositories/user_repository.dart';
-
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
+  await Firebase.initializeApp();
   final UserRepository userRepository = UserRepository();
 
   runApp(

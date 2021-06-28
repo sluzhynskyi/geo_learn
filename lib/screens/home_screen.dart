@@ -27,31 +27,13 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
+      body: Container(
+        margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
         child: Column(
           children: [
+            // TODO: retrieve points from Firebase
             HomeTitle(user.email, 103),
-            Row(
-              children: [
-                Icon(Icons.quiz),
-                Text("Quizzes"),
-              ],
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.search),
-                labelText: "Search",
-              ),
-              autocorrect: false,
-            ),
-            Text("Categories"),
-            // Container(),
-            TextButton(
-                child: Text('Quiz', textAlign: TextAlign.center),
-                onPressed:(){
-                  Navigator.pushNamed(context, "/quiz");
-                }
-            )
+            QuizzesFeed(),
           ],
         ),
       ),
@@ -65,11 +47,79 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class QuizzesFeed extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Icon(Icons.quiz),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5),
+                child: Text(
+                  "Quizzes",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            child: TextFormField(
+              decoration: InputDecoration(
+                icon: Icon(Icons.search),
+                labelText: "Search",
+              ),
+              autocorrect: false,
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+              child: Text(
+                "Categories",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              )),
+          // Container(),
+          Container(
+            width: double.infinity,
+            height: 70,
+            decoration: BoxDecoration(
+              color: Colors.lightGreen[100],
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 2),
+                  blurRadius: 4.0,
+                )
+              ],
+              borderRadius: BorderRadius.circular(100.0),
+            ),
+            child: TextButton(
+              child: Text('Example Quiz',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center),
+              onPressed: () {
+                Navigator.pushNamed(context, "/quiz");
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class HomeTitle extends StatelessWidget {
   final String? username;
   final int? score;
 
-  HomeTitle(String? username, int? score):username=username, score=score;
+  HomeTitle(String? username, int? score)
+      : username = username,
+        score = score;
 
   @override
   Widget build(BuildContext context) {

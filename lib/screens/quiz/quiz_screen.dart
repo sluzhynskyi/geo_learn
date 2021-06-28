@@ -16,7 +16,6 @@ import 'package:geo_learn/repositories/quiz/quiz_repository.dart';
 import 'package:geo_learn/widgets/buttons.dart';
 import 'package:geo_learn/widgets/circular_icon.dart';
 
-
 final quizQuestionsProvider = FutureProvider.autoDispose<List<Question>>(
   (ref) => ref.watch(quizRepositoryProvider).getQuestions(
         numQuestions: 5,
@@ -25,11 +24,11 @@ final quizQuestionsProvider = FutureProvider.autoDispose<List<Question>>(
       ),
 );
 
-class QuizScreen extends StatelessWidget{
+class QuizScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ProviderScope(
-      child: _QuizScreenInner(), 
+      child: _QuizScreenInner(),
     );
   }
 }
@@ -50,8 +49,10 @@ class _QuizScreenInner extends HookWidget {
         ),
       ),
       child: Scaffold(
-        appBar:AppBar(
-          title: Text('Quiz'),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
         backgroundColor: Colors.transparent,
         body: quizQuestions.when(

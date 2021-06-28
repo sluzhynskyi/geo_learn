@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = Provider.of<User?>(context);
     if (user == null) {
-      Future.microtask(() => Navigator.pushNamed(context, "/login"));
+      Future.microtask(() => Navigator.pushReplacementNamed(context, "/login"));
       return Scaffold();
     }
     // print(user);

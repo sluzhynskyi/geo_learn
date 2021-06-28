@@ -29,7 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
   Widget build(context) {
     User? user = Provider.of<User?>(context);
     if (user != null) {
-      Future.microtask(() => Navigator.pushNamed(context, "/"));
+      Future.microtask(() => Navigator.pushReplacementNamed(context, "/"));
       return Scaffold();
     }
     //TODO: need better UI

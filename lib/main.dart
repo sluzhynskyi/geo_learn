@@ -1,61 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:geo_learn/repositories/user_repository.dart';
+
 import 'package:geo_learn/screens/home_screen.dart';
 import 'package:geo_learn/screens/login/login_screen.dart';
+import 'package:geo_learn/screens/register/register_screen.dart';
 
-import 'blocs/authentication_bloc/authentication_bloc.dart';
-import 'blocs/simple_bloc_observer.dart';
-import 'repositories/user_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
+import 'package:provider/provider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = SimpleBlocObserver();
   await Firebase.initializeApp();
-  final UserRepository userRepository = UserRepository();
-
   runApp(
-    BlocProvider(
-      create: (context) => AuthenticationBloc(
-        userRepository: userRepository,
-      )..add(AuthenticationStarted()),
-      child: MyApp(
-        userRepository: userRepository,
-      ),
-    ),
+    GeoLearn()
   );
 }
 
-class MyApp extends StatelessWidget {
-  final UserRepository _userRepository;
-
-  MyApp({required UserRepository userRepository})
-      : _userRepository = userRepository;
-
+class GeoLearn extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        // StreamProvider<Report>.value(stream: Global.reportRef.documentStream),
+        StreamProvider<User?>.value(value: FirebaseAuth.instance.authStateChanges(), initialData:null),
+        ],
+      child: AppRouter()
+      );
+  }
+}
+
+class AppRouter extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    User? user = Provider.of<User?>(context);
+    print(user);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Flutter Demo",
-        home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-          if (state is AuthenticationFailure) {
-            // return GetStartedScreen(userRepository: _userRepository);
-            return LoginScreen(userRepository: _userRepository);
-          }
-
-          if (state is AuthenticationSuccess) {
-            return HomeScreen(
-              user: state.user,
-            );
-          }
-
-          return Scaffold(
-            appBar: AppBar(),
-            body: Container(
-              child: Center(child: Text("Loading")),
-            ),
-          );
-        }));
+                // Named Routes
+        routes: {
+          '/': (context) => HomeScreen(),
+          '/login': (context) => LoginScreen(),
+          '/register': (context) => RegisterScreen(),
+        }
+    );
   }
 }

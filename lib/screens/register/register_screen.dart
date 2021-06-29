@@ -1,6 +1,7 @@
 import 'package:geo_learn/utils/auth.dart';
 import 'package:geo_learn/utils/validators.dart';
 import 'package:geo_learn/widgets/error.dart';
+import 'package:geo_learn/utils/database.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -109,14 +110,15 @@ class RegisterScreenState extends State<RegisterScreen> {
                       child: Text('Sign Up', textAlign: TextAlign.center),
                       onPressed: () async {
                         try {
-                          var user = await Auth.signUp(email, password);
+                          user = await Auth.signUp(email, password);
+                          Navigator.pushReplacementNamed(context, '/login');
+                          if(user != null && user?.uid != null){
+                            DatabaseManager.setScore(user!.uid, 0);
+                          }
                         } catch (error) {
                           setState(() {
                             registerError = "Registration error";
                           });
-                        }
-                        if (user != null) {
-                          Navigator.pushReplacementNamed(context, '/login');
                         }
                       },
                     ),

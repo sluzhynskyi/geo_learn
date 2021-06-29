@@ -16,6 +16,11 @@ import 'package:geo_learn/repositories/quiz/quiz_repository.dart';
 import 'package:geo_learn/widgets/buttons.dart';
 import 'package:geo_learn/widgets/circular_icon.dart';
 
+import 'package:geo_learn/utils/auth.dart';
+import 'package:geo_learn/utils/database.dart';
+
+
+
 final quizQuestionsProvider = FutureProvider.autoDispose<List<Question>>(
   (ref) => ref.watch(quizRepositoryProvider).getQuestions(
         numQuestions: 5,
@@ -140,7 +145,7 @@ class QuizError extends StatelessWidget {
   }
 }
 
-class QuizResults extends StatelessWidget {
+class QuizResults extends StatefulWidget{
   final QuizState state;
   final List<Question> questions;
 
@@ -149,6 +154,33 @@ class QuizResults extends StatelessWidget {
     required this.state,
     required this.questions,
   }) : super(key: key);
+
+  @override
+  State<QuizResults> createState() {
+    return _QuizResultsState(state:state, questions:questions);
+  }
+}
+
+class _QuizResultsState extends State<QuizResults> {
+  final QuizState state;
+  final List<Question> questions;
+
+  @override
+  _QuizResultsState({
+    required this.state,
+    required this.questions,
+  });
+
+  @override
+  void initState(){
+    Auth.currentUser().then((user) {
+       if(user != null){
+                  DatabaseManager.updateScore(user.uid, state.correct.length);
+                  print("Add ${state.correct.length} points to ${user.email}");
+                }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

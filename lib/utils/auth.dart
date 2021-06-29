@@ -10,8 +10,11 @@ class Auth{
   static Future<User?> signIn(String email, String password) async {
     UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-
     return result.user;
+  }
+
+  static Future<User?> currentUser()async{
+    return _firebaseAuth.currentUser;
   }
 
   static Future<User?> signUp(String email, String password) async {

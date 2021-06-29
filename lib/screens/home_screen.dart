@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:geo_learn/utils/auth.dart';
+import 'package:geo_learn/utils/database.dart';
 
 class HomeScreen extends StatelessWidget {
   // final UserRepository auth = UserRepository();
@@ -31,8 +32,7 @@ class HomeScreen extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
         child: Column(
           children: [
-            // TODO: retrieve points from Firebase
-            HomeTitle(user.email, 103),
+            HomeTitle(user),
             QuizzesFeed(),
           ],
         ),
@@ -114,32 +114,42 @@ class QuizzesFeed extends StatelessWidget {
 }
 
 class HomeTitle extends StatelessWidget {
-  final String? username;
-  final int? score;
+  final User? user;
 
-  HomeTitle(String? username, int? score)
-      : username = username,
-        score = score;
+  HomeTitle(User? user) : user = user;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Center(
-                child: Text("Hello, $username"),
-                // heightFactor: ,
-              ),
-              Center(
-                child: Text("Points: $score"),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+    return FutureBuilder(
+        future: DatabaseManager.getScore((user?.uid)??""),
+        initialData:0,
+        builder: (BuildContext context, AsyncSnapshot<int> score) {
+          // print(score);
+          return Container(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                IconButton(
+                    icon: Center(child: Icon(Icons.person_sharp, size: 50)),
+                    onPressed: () {}),
+                Column(
+                  children: [
+                    Container(
+                        child: Text(
+                      (user?.email) ?? "Guest",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                    )),
+                    Container(
+                      child: Text("Points:${score.data}",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

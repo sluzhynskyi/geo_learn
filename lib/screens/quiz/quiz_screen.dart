@@ -156,11 +156,25 @@ class QuizResults extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        SizedBox(height: 20),
+        Image.asset('assets/images/planet-earth.png',
+            height: 100, width: 100),
+        SizedBox(height: 20),
         Text(
-          '${state.correct.length} / ${questions.length}',
+          'GeoLearn',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 40),
+        Text(
+          'SCORE : ${state.correct.length} / ${questions.length}',
           style: const TextStyle(
-            color: Colors.white,
-            fontSize: 60.0,
+            color: Colors.black,
+            fontSize: 40.0,
             fontWeight: FontWeight.w600,
           ),
           textAlign: TextAlign.center,
@@ -168,8 +182,8 @@ class QuizResults extends StatelessWidget {
         const Text(
           'CORRECT',
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 48.0,
+            color: Colors.black,
+            fontSize: 40.0,
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
@@ -218,10 +232,10 @@ class QuizQuestions extends StatelessWidget {
           children: [
             Text(
               'Question ${index + 1} of ${questions.length}',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+              style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
               ),
             ),
             Padding(
@@ -229,10 +243,10 @@ class QuizQuestions extends StatelessWidget {
               child: Text(
                 HtmlCharacterEntities.decode(question.question),
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 28.0,
+                  color: Colors.black,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.w500,
-                ),
+                ),textAlign: TextAlign.center,
               ),
             ),
             Divider(

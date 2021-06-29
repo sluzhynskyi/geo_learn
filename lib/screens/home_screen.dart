@@ -226,7 +226,7 @@ class QuizzesFeed extends StatelessWidget {
             ),
             
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () async {

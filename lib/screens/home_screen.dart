@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
       Future.microtask(() => Navigator.pushReplacementNamed(context, "/login"));
       return Scaffold();
     }
+
     // print(user);
     return Scaffold(
       body: Container(
@@ -52,7 +53,7 @@ class QuizzesFeed extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 40),
-                Image.asset('assets/images/planet-earth.png', height: 100, width: 100),
+                Image.asset('images/planet-earth.png', height: 100, width: 100),
                 SizedBox(height: 20),  
                   Text(
                   'GeoLearn',
@@ -119,7 +120,7 @@ class QuizzesFeed extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center),
               onPressed: () {
-                Navigator.pushNamed(context, "/quiz");
+                Navigator.pushReplacementNamed(context, "/quiz");
               },
             ),
           ),
@@ -154,7 +155,7 @@ class QuizzesFeed extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center),
               onPressed: () {
-                Navigator.pushNamed(context, "/quiz");
+                Navigator.pushReplacementNamed(context, "/quiz");
               },
             ),
             
@@ -190,7 +191,7 @@ class QuizzesFeed extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center),
               onPressed: () {
-                Navigator.pushNamed(context, "/quiz");
+                Navigator.pushReplacementNamed(context, "/quiz");
               },
             ),
             
@@ -226,7 +227,7 @@ class QuizzesFeed extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center),
               onPressed: () {
-                Navigator.pushNamed(context, "/quiz");
+                Navigator.pushReplacementNamed(context, "/quiz");
               },
             ),
           ),

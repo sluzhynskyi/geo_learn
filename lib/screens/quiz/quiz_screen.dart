@@ -189,7 +189,7 @@ class _QuizResultsState extends State<QuizResults> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(height: 20),
-        Image.asset('assets/images/planet-earth.png',
+        Image.asset('images/planet-earth.png',
             height: 100, width: 100),
         SizedBox(height: 20),
         Text(
@@ -231,7 +231,8 @@ class _QuizResultsState extends State<QuizResults> {
         CustomButton(
           title: 'Go back',
           onTap: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, "/");
           },
         ),
       ],

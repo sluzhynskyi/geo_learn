@@ -57,7 +57,7 @@ class LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(height: 20),
-                    Image.asset('assets/images/planet-earth.png',
+                    Image.asset('images/planet-earth.png',
                         height: 100, width: 100),
                     SizedBox(height: 20),
                     Text(

@@ -15,6 +15,10 @@ class DatabaseManager {
     return snapshot["score"] ?? 0;
   }
 
+  // static Stream<int> score(uid) {
+  //   return _profileList.doc(uid).snapshots().
+  // }
+
   // static Stream<UserProfile> profile(String uid){
   //   return _profileList.doc(uid).snapshots().map(
   //     (DocumentSnapshot snapshot){

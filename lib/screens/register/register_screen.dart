@@ -154,7 +154,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                             : null;
                       },
                     ),
-                    SizedBox(height: 70),
+                    SizedBox(height: 35),
                     Container(
                       height: 50.0,
                       width: 200.0,

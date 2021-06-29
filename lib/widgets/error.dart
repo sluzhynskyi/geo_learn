@@ -12,13 +12,12 @@ Widget build(context) {
             // print(loginError);
             if (_message != "") {
               return Container(
-                  padding: EdgeInsets.only(top: 20, left: 30, right: 30),
-                  height: 80,
+                  padding: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 10),
                   decoration: BoxDecoration(
                     color: Colors.red[300],
                     shape: BoxShape.rectangle,
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(10)),
+                        BorderRadius.all(Radius.circular(20)),
                   ),
                   width: double.infinity,
                   child: Text(

@@ -16,73 +16,78 @@ class HomeScreen extends StatelessWidget {
     }
     // print(user);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: () async {
-              await Auth.signOut();
-            },
-          )
-        ],
-      ),
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+        decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF85B5E1), Color(0xFFE9F5E2)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
         child: Column(
           children: [
-            // TODO: retrieve points from Firebase
-            HomeTitle(user.email, 103),
-            QuizzesFeed(),
+            QuizzesFeed(user.email, 0),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Feed"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
       ),
     );
   }
 }
 
 class QuizzesFeed extends StatelessWidget {
+  final String? username;
+  final int? score;
+
+  QuizzesFeed(String? username, int? score)
+      : username = username,
+        score = score;
+
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          Row(
-            children: [
-              Icon(Icons.quiz),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5),
-                child: Text(
-                  "Quizzes",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          SizedBox(height: 40),
+                Image.asset('assets/images/planet-earth.png', height: 100, width: 100),
+                SizedBox(height: 20),  
+                  Text(
+                  'GeoLearn',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+                SizedBox(height: 10),
+                Text(
+                  'Score: $score',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                  // padding: EdgeInsets.bottom(30),
+                ),
+                SizedBox(height: 20),
+                  Text(
+                    'Hi $username !\n Select a quiz and start learning.',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+          Row(
           ),
+          
+          SizedBox(height: 20),
+          
           Container(
-            child: TextFormField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.search),
-                labelText: "Search",
-              ),
-              autocorrect: false,
-            ),
-          ),
-          Container(
-              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
-              child: Text(
-                "Categories",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-              )),
-          // Container(),
-          Container(
-            width: double.infinity,
-            height: 70,
+            height: 60.0,
+            width: 350.0,
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: Colors.lightGreen[100],
               boxShadow: const [
@@ -94,8 +99,14 @@ class QuizzesFeed extends StatelessWidget {
               ],
               borderRadius: BorderRadius.circular(100.0),
             ),
-            child: TextButton(
-              child: Text('Example Quiz',
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Color.fromRGBO(156, 235, 124, 1))),
+              padding: EdgeInsets.all(10.0),
+              color: Color.fromRGBO(156, 235, 124, 1),
+              textColor: Colors.white,
+              child: Text('Beginner Quiz',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -106,40 +117,125 @@ class QuizzesFeed extends StatelessWidget {
                 Navigator.pushNamed(context, "/quiz");
               },
             ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class HomeTitle extends StatelessWidget {
-  final String? username;
-  final int? score;
-
-  HomeTitle(String? username, int? score)
-      : username = username,
-        score = score;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Center(
-                child: Text("Hello, $username"),
-                // heightFactor: ,
-              ),
-              Center(
-                child: Text("Points: $score"),
-              ),
-            ],
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 60.0,
+            width: 350.0,
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.lightGreen[100],
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 2),
+                  blurRadius: 4.0,
+                )
+              ],
+              borderRadius: BorderRadius.circular(100.0),
+            ),
+           child: RaisedButton(
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Color.fromRGBO(224, 220, 79, 1))),
+              padding: EdgeInsets.all(10.0),
+              color: Color.fromRGBO(0224, 220, 79, 1),
+              textColor: Colors.white,
+              child: Text('Master Quiz',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center),
+              onPressed: () {
+                Navigator.pushNamed(context, "/quiz");
+              },
+            ),
+            
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 60.0,
+            width: 350.0,
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.lightGreen[100],
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 2),
+                  blurRadius: 4.0,
+                )
+              ],
+              borderRadius: BorderRadius.circular(100.0),
+            ),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Color.fromRGBO(224, 185, 79, 1))),
+              padding: EdgeInsets.all(10.0),
+              color: Color.fromRGBO(224, 185, 79, 1),
+              textColor: Colors.white,
+              child: Text('Skilled Quiz',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center),
+              onPressed: () {
+                Navigator.pushNamed(context, "/quiz");
+              },
+            ),
+            
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 60.0,
+            width: 350.0,
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.lightGreen[100],
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 2),
+                  blurRadius: 4.0,
+                )
+              ],
+              borderRadius: BorderRadius.circular(100.0),
+            ),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Color.fromRGBO(222, 69, 55, 1))),
+              padding: EdgeInsets.all(10.0),
+              color: Color.fromRGBO(222, 69, 55, 1),
+              textColor: Colors.white,
+              child: Text('Expert Quiz',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center),
+              onPressed: () {
+                Navigator.pushNamed(context, "/quiz");
+              },
+            ),
+            
+          ),
+          SizedBox(height: 20),
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () async {
+              await Auth.signOut();
+            },
           ),
         ],
       ),
     );
   }
 }
+

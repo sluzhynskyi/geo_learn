@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           ),
         child: Column(
           children: [
-            QuizzesFeed(user.email),
+            QuizzesFeed(user.email, 0),
           ],
         ),
       ),
@@ -35,10 +35,12 @@ class HomeScreen extends StatelessWidget {
 }
 
 class QuizzesFeed extends StatelessWidget {
-final String? username;
+  final String? username;
+  final int? score;
 
-  QuizzesFeed(String? username)
-      : username = username;
+  QuizzesFeed(String? username, int? score)
+      : username = username,
+        score = score;
 
   Widget build(BuildContext context) {
     return Container(
@@ -55,8 +57,19 @@ final String? username;
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Score: $score',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                   // padding: EdgeInsets.bottom(30),
                 ),
+                SizedBox(height: 20),
                   Text(
                     'Hi $username !\n Select a quiz and start learning.',
                     style: TextStyle(
@@ -69,7 +82,7 @@ final String? username;
           Row(
           ),
           
-          SizedBox(height: 50),
+          SizedBox(height: 20),
           
           Container(
             height: 60.0,
@@ -105,7 +118,7 @@ final String? username;
               },
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           Container(
             height: 60.0,
             width: 350.0,

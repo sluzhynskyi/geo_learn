@@ -49,7 +49,7 @@ class AppRouter extends StatelessWidget {
         '/quiz': (context) => QuizScreen()
       },
       theme: ThemeData(
-        primarySwatch: createMaterialColor(Color(0xFFA5DC69)),
+        primarySwatch: Colors.blue,
         bottomSheetTheme:
             const BottomSheetThemeData(backgroundColor: Colors.transparent),
       ),

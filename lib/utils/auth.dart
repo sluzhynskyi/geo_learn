@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-  
-class Auth{
+class Auth {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   static Stream<User?> get user => _firebaseAuth.authStateChanges();
-  
+
   static Future<User?> signIn(String email, String password) async {
     UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
@@ -26,6 +24,4 @@ class Auth{
   static Future<void> signOut() async {
     return _firebaseAuth.signOut();
   }
-
-
 }

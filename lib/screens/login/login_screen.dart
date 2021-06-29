@@ -176,10 +176,6 @@ class LoginScreenState extends State<LoginScreen> {
                                 context, '/register');
                           },
                         )),
-                    SizedBox(
-                      height: 70,
-                      width: 100,
-                    ),
                     ShowError(loginError)
                   ],
                 ),
